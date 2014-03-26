@@ -7,9 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "PhotoexViewController.h"
 
 @interface PhotoexAppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
+@property (strong, nonatomic) PhotoexViewController *viewController;
+
 
 @end

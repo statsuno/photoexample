@@ -8,6 +8,15 @@
 
 #import <UIKit/UIKit.h>
 
-@interface PhotoexViewController : UIViewController
+@interface PhotoexViewController : UIViewController <UICollectionViewDelegate, UICollectionViewDataSource>
+{
+    UICollectionViewFlowLayout *_flowLayout;
+    UICollectionView *_collectionView;
+}
+
+@property (retain, nonatomic) UICollectionViewFlowLayout *flowLayout;
+@property (retain, nonatomic) UICollectionView *collectionView;
+
+@property (strong, nonatomic) NSArray *array;
 
 @end
