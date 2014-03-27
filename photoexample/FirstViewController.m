@@ -8,6 +8,7 @@
 
 #import "FirstViewController.h"
 #import <AssetsLibrary/AssetsLibrary.h>
+#import "PhotoexAppDelegate.h"
 
 @interface FirstViewController ()
 
@@ -121,15 +122,13 @@
     [stillCamera capturePhotoAsJPEGProcessedUpToFilter:filter withCompletionHandler:^(NSData *processedJPEG, NSError *error){
         
         //NSData *data = UIImagePNGRepresentation(image);
-        NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
-        NSMutableDictionary *defaults = [NSMutableDictionary dictionary];
-        [defaults setObject:@"0" forKey:@"KEY_I"];
-        long i= [ud integerForKey:@"KEY_I"]+1;
-        [ud setInteger:i forKey:@"KEY_I"];
-        NSString *filePath = [NSString stringWithFormat:@"%@/test%ld.jpg" , [NSHomeDirectory() stringByAppendingPathComponent:@"Documents"],i];
-        NSLog(@"%@", filePath);
+        int i= [[app models] integerForKey:@"KEY_I"];
+        [[app models] setInteger:i+1 forKey:@"KEY_I"];
+        NSLog(@"i=%d",i);
+        NSString *filePath = [NSString stringWithFormat:@"%@/test%d.jpg" , [NSHomeDirectory() stringByAppendingPathComponent:@"Documents"],i];
+        //NSLog(@"%@", filePath);
         if ([processedJPEG writeToFile:filePath atomically:YES]) {
-            NSLog(@"OK");
+            //NSLog(@"OK");
         } else {
             NSLog(@"Error");
         }

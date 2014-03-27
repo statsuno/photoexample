@@ -24,10 +24,11 @@
     //self.viewController = [[PhotoexViewController alloc] init];
     //self.window.rootViewController = self.viewController;
     
-    
+    self.models = [[NSUserDefaults alloc] init];
+    [self.models setObject:@"0" forKey:@"KEY_I"];
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    self.window.backgroundColor = [UIColor whiteColor];
+    self.window.backgroundColor = [UIColor blackColor];
     
     PhotoexViewController *c = PhotoexViewController.new;
     self.naviCtrl = [[UINavigationController alloc] initWithRootViewController:c];

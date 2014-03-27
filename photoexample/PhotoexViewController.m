@@ -6,6 +6,7 @@
 //  Copyright (c) 2014年 龍野翔. All rights reserved.
 //
 
+#import "PhotoexAppDelegate.h"
 #import "FirstViewController.h"
 #import "SecondViewController.h"
 #import "PhotoexViewController.h"
@@ -23,10 +24,9 @@
     return self;
 }
 
-
 - (void)viewDidLoad{
     [super viewDidLoad];
-    self.view.backgroundColor = [UIColor blueColor];
+    self.view.backgroundColor = [UIColor blackColor];
     
     UIBarButtonItem *right = [[UIBarButtonItem alloc]
                               initWithTitle:@"next"
@@ -39,13 +39,17 @@
     NSArray *buttons=[NSArray arrayWithObjects:spacer,button,spacer,nil];
     [self setToolbarItems:buttons animated:YES];
     
-    //begch
+    /*//begch
     NSMutableArray *photo1 = [NSMutableArray array];
-    NSUserDefaults *nud = [NSUserDefaults standardUserDefaults];
-    [nud setObject:@"0" forKey:@"KEY_I"];
-    int n=4;
-    [nud setInteger:n forKey:@"KEY_I"];
+    NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
+    [ud setObject:@"0" forKey:@"KEY_I"];
+    int n = [ud integerForKey:@"KEY_I"];
+    [ud synchronize];
+    NSLog(@"%d",n);
     
+    if (n==0) {
+    }
+    else{
     for (int i = 0; i < n; i++) {
         NSData *myData;
         NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
@@ -61,11 +65,13 @@
         [photo1 addObject:img];
     }
     self.array = @[photo1];
+    }
     
     // collectionViewにcellのクラスを登録
     [self.collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"CollectionViewCell"];
     [self createCollectionView];
     //edch
+    */
     
 }
 
@@ -97,9 +103,36 @@
     [self.view addSubview:self.collectionView];
 }
 
-
 - (void)viewWillAppear:(BOOL)animated
 {
+    NSMutableArray *photo1 = [NSMutableArray array];
+    int n = [[app models] integerForKey:@"KEY_I"];
+    NSLog(@"n=%d",n);
+    
+    if (n==0) {
+    }
+    else{
+        for (int i = 0; i < n; i++) {
+            NSData *myData;
+            NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+            NSString *documentsDirectory = [paths objectAtIndex:0];
+            NSString *filename= [NSString stringWithFormat:@"test%d.jpg",i];
+            NSString *path = [documentsDirectory stringByAppendingPathComponent:filename];
+            NSFileManager *fileManager = [NSFileManager defaultManager];
+            BOOL success = [fileManager fileExistsAtPath:path];
+            if(success) {
+                myData = [[NSData alloc] initWithContentsOfFile:path];
+            }
+            UIImage *img = [[UIImage alloc] initWithData:myData];
+            [photo1 addObject:img];
+        }
+        self.array = @[photo1];
+    }
+    
+    // collectionViewにcellのクラスを登録
+    [self.collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"CollectionViewCell"];
+    [self createCollectionView];
+    
     self.navigationController.toolbarHidden = NO;
     [self.navigationController setToolbarHidden:NO animated:YES]; //change
 }
