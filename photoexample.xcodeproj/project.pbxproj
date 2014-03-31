@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CA060E8018E85A9C00D3310E /* Subview.m in Sources */ = {isa = PBXBuildFile; fileRef = CA060E7F18E85A9C00D3310E /* Subview.m */; };
 		CA0E3EAB18CAFDE7004CF694 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CA0E3EAA18CAFDE7004CF694 /* Foundation.framework */; };
 		CA0E3EAD18CAFDE7004CF694 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CA0E3EAC18CAFDE7004CF694 /* CoreGraphics.framework */; };
 		CA0E3EAF18CAFDE7004CF694 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CA0E3EAE18CAFDE7004CF694 /* UIKit.framework */; };
@@ -58,6 +59,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		CA060E7E18E85A9C00D3310E /* Subview.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Subview.h; sourceTree = "<group>"; };
+		CA060E7F18E85A9C00D3310E /* Subview.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Subview.m; sourceTree = "<group>"; };
 		CA0E3EA718CAFDE7004CF694 /* photoexample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = photoexample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CA0E3EAA18CAFDE7004CF694 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		CA0E3EAC18CAFDE7004CF694 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -172,6 +175,8 @@
 				CA0E3EC018CAFDE7004CF694 /* PhotoexViewController.m */,
 				CA0E3F1418CB068C004CF694 /* FirstViewController.h */,
 				CA0E3F1518CB068C004CF694 /* FirstViewController.m */,
+				CA060E7E18E85A9C00D3310E /* Subview.h */,
+				CA060E7F18E85A9C00D3310E /* Subview.m */,
 				CA0E3F1718CB069F004CF694 /* SecondViewController.h */,
 				CA0E3F1818CB069F004CF694 /* SecondViewController.m */,
 				CA0E3EC218CAFDE7004CF694 /* Images.xcassets */,
@@ -339,6 +344,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CA0E3EC118CAFDE7004CF694 /* PhotoexViewController.m in Sources */,
+				CA060E8018E85A9C00D3310E /* Subview.m in Sources */,
 				CA0E3F1618CB068C004CF694 /* FirstViewController.m in Sources */,
 				CA0E3EBB18CAFDE7004CF694 /* PhotoexAppDelegate.m in Sources */,
 				CA0E3F1918CB069F004CF694 /* SecondViewController.m in Sources */,

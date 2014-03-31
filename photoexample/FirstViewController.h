@@ -13,7 +13,7 @@
 {
     GPUImageStillCamera *stillCamera;
     GPUImageOutput<GPUImageInput> *filter, *secondFilter, *terminalFilter;
-    UISlider *filterSettingsSlider;
+    //UISlider *filterSettingsSlider;
     UIButton *photoCaptureButton;
 }
 

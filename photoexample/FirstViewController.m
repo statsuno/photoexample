@@ -9,6 +9,7 @@
 #import "FirstViewController.h"
 #import <AssetsLibrary/AssetsLibrary.h>
 #import "PhotoexAppDelegate.h"
+#import "Subview.h"
 
 @interface FirstViewController ()
 
@@ -33,17 +34,22 @@
 	GPUImageView *primaryView = [[GPUImageView alloc] initWithFrame:mainScreenFrame];
 	primaryView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     
+    /*
     filterSettingsSlider = [[UISlider alloc] initWithFrame:CGRectMake(25.0, mainScreenFrame.size.height - 50.0, mainScreenFrame.size.width - 50.0, 40.0)];
     [filterSettingsSlider addTarget:self action:@selector(updateSliderValue:) forControlEvents:UIControlEventValueChanged];
 	filterSettingsSlider.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleTopMargin;
     filterSettingsSlider.minimumValue = 0.0;
     filterSettingsSlider.maximumValue = 3.0;
     filterSettingsSlider.value = 1.0;
+     */
     
-    [primaryView addSubview:filterSettingsSlider];
+    //[primaryView addSubview:filterSettingsSlider];
     UIBarButtonItem *button=[[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemCamera target:self action:@selector(takePhoto:)];
     UIBarButtonItem *spacer=[[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
-    NSArray *buttons=[NSArray arrayWithObjects:spacer,button,spacer,nil];
+    UIBarButtonItem *filterbutton =[[UIBarButtonItem alloc] initWithTitle:@"F"  style:UIBarButtonItemStyleBordered target:self action:@selector(pushfilterview)
+                                    ];
+    NSArray *buttons=[NSArray arrayWithObjects:spacer,button,spacer,filterbutton,nil];
+    //NSArray *buttons=[NSArray arrayWithObjects:spacer,button,spacer,nil];
     [self setToolbarItems:buttons animated:YES];
     
     /*
@@ -132,38 +138,26 @@
         } else {
             NSLog(@"Error");
         }
-        //[data release];
-        
-        
-        /*
-        // Save to assets library
-        ALAssetsLibrary *library = [[ALAssetsLibrary alloc] init];
-        //        report_memory(@"After asset library creation");
-        
-        
-        [library addAssetsGroupAlbumWithName: @"Documents"
-         resultBlock:^(ALAssetsGroup *group) { NSLog(@"album create");}
-         failureBlock:^(NSError *error){ NSLog(@"error code: %d", [error code]);}
-         ];
-         
-        
-        [library writeImageDataToSavedPhotosAlbum:processedJPEG metadata:stillCamera.currentCaptureMetadata completionBlock:^(NSURL *assetURL, NSError *error2)
-         {
-             //             report_memory(@"After writing to library");
-             if (error2) {
-                 NSLog(@"ERROR: the image failed to be written");
-             }
-             else {
-                 NSLog(@"PHOTO SAVED - assetURL: %@", assetURL);
-             }
-			 
-             runOnMainQueueWithoutDeadlocking(^{
-                 //                 report_memory(@"Operation completed");
-                 [photoCaptureButton setEnabled:YES];
-             });
-         }];
-         */
+
     }];
 }
+
+-(void)pushfilterview
+{
+    /*
+     if ([SubView isDescendantOfView:self])
+     {
+     for (UIView *view in [self.view subviews]) {
+     [view removeFromSuperview];
+     }
+     
+     }
+     else{ */
+     Subview *uv = Subview.new;
+     [self.view addSubview:uv];
+     //}
+
+}
+
 
 @end

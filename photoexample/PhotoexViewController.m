@@ -1,11 +1,3 @@
-//
-//  PhotoexViewController.m
-//  photoexample
-//
-//  Created by 龍野翔 on 2014/03/08.
-//  Copyright (c) 2014年 龍野翔. All rights reserved.
-//
-
 #import "PhotoexAppDelegate.h"
 #import "FirstViewController.h"
 #import "SecondViewController.h"
@@ -38,40 +30,6 @@
     UIBarButtonItem *spacer=[[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
     NSArray *buttons=[NSArray arrayWithObjects:spacer,button,spacer,nil];
     [self setToolbarItems:buttons animated:YES];
-    
-    /*//begch
-    NSMutableArray *photo1 = [NSMutableArray array];
-    NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
-    [ud setObject:@"0" forKey:@"KEY_I"];
-    int n = [ud integerForKey:@"KEY_I"];
-    [ud synchronize];
-    NSLog(@"%d",n);
-    
-    if (n==0) {
-    }
-    else{
-    for (int i = 0; i < n; i++) {
-        NSData *myData;
-        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-        NSString *documentsDirectory = [paths objectAtIndex:0];
-        NSString *filename= [NSString stringWithFormat:@"test%d.jpg",i];
-        NSString *path = [documentsDirectory stringByAppendingPathComponent:filename];
-        NSFileManager *fileManager = [NSFileManager defaultManager];
-        BOOL success = [fileManager fileExistsAtPath:path];
-        if(success) {
-            myData = [[NSData alloc] initWithContentsOfFile:path];
-        }
-        UIImage *img = [[UIImage alloc] initWithData:myData];
-        [photo1 addObject:img];
-    }
-    self.array = @[photo1];
-    }
-    
-    // collectionViewにcellのクラスを登録
-    [self.collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"CollectionViewCell"];
-    [self createCollectionView];
-    //edch
-    */
     
 }
 
@@ -183,4 +141,3 @@
 
 
 @end
-
