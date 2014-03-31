@@ -6,16 +6,17 @@
 //  Copyright (c) 2014年 龍野翔. All rights reserved.
 //
 
-#import "FirstViewController.h"
+#import "CameraViewController.h"
 #import <AssetsLibrary/AssetsLibrary.h>
 #import "PhotoexAppDelegate.h"
-#import "Subview.h"
+#import "FilterchoiceView.h"
 
-@interface FirstViewController ()
-
+@interface CameraViewController ()
+@property (nonatomic, strong) FilterchoiceView *filterView;
+@property BOOL isFilterViewOpen;
 @end
 
-@implementation FirstViewController
+@implementation CameraViewController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -142,21 +143,28 @@
     }];
 }
 
--(void)pushfilterview
-{
-    /*
-     if ([SubView isDescendantOfView:self])
-     {
-     for (UIView *view in [self.view subviews]) {
-     [view removeFromSuperview];
-     }
-     
-     }
-     else{ */
-     Subview *uv = Subview.new;
-     [self.view addSubview:uv];
-     //}
+-(void)pushfilterview{
+    if(!self.filterView){
+        self.filterView = FilterchoiceView.new;
+    }
+    if(self.isFilterViewOpen){
+        [self.filterView removeFromSuperview];
+        self.isFilterViewOpen = NO;
+    }else{
+        [self.view addSubview:self.filterView];
+        self.isFilterViewOpen = YES;
+    }
+}
 
+-(void)pushed_button:(id)sender
+{
+    if ([sender tag] == 1) {
+        NSLog(@"1");
+    } else if ([sender tag] == 2) {
+        NSLog(@"2");
+    } else if ([sender tag] == 3) {
+        NSLog(@"3");
+    }
 }
 
 

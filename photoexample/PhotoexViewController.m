@@ -1,6 +1,6 @@
 #import "PhotoexAppDelegate.h"
-#import "FirstViewController.h"
-#import "SecondViewController.h"
+#import "CameraViewController.h"
+#import "PictureViewController.h"
 #import "PhotoexViewController.h"
 
 @interface PhotoexViewController ()
@@ -20,11 +20,12 @@
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor blackColor];
     
-    UIBarButtonItem *right = [[UIBarButtonItem alloc]
+    /*UIBarButtonItem *right = [[UIBarButtonItem alloc]
                               initWithTitle:@"next"
                               style:UIBarButtonItemStylePlain
                               target:self action:@selector(actionNext)];
     self.navigationItem.rightBarButtonItem = right;
+     */
     
     UIBarButtonItem *button=[[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(beginCamera)];
     UIBarButtonItem *spacer=[[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
@@ -33,17 +34,19 @@
     
 }
 
+/*
 - (void)actionNext{
     SecondViewController *c = SecondViewController.new;
     [self.navigationController pushViewController:c animated:YES];
 }
+*/
 
 -(void)beginCamera{
-    FirstViewController *c2 = FirstViewController.new;
+    CameraViewController *c2 = CameraViewController.new;
     [self.navigationController pushViewController:c2 animated:YES];
     
 }
-//begch
+
 -(void)createCollectionView
 {
     /*UICollectionViewのコンテンツの設定 UICollectionViewFlowLayout*/
@@ -130,14 +133,13 @@
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
     //クリックされたらよばれる
-    SecondViewController *c = SecondViewController.new;
+    PictureViewController *c = PictureViewController.new;
     NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
     [ud setInteger:(int)indexPath.row forKey:@"KEY_K"];
     [self.navigationController pushViewController:c animated:YES];
     NSLog(@"Clicked %ld-%ld",(long)indexPath.section,(long)indexPath.row);
 }
 
-//edch
 
 
 @end

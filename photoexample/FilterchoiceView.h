@@ -7,8 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "FirstViewController.h"
+#import "CameraViewController.h"
 
-@interface Subview : UIView
+@interface FilterchoiceView : UIView
 
 @end

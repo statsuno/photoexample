@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "GPUImage.h"
 
-@interface FirstViewController : UIViewController
+@interface CameraViewController : UIViewController
 {
     GPUImageStillCamera *stillCamera;
     GPUImageOutput<GPUImageInput> *filter, *secondFilter, *terminalFilter;

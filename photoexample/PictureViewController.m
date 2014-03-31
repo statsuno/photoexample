@@ -6,13 +6,13 @@
 //  Copyright (c) 2014年 龍野翔. All rights reserved.
 //
 
-#import "SecondViewController.h"
+#import "PictureViewController.h"
 
-@interface SecondViewController ()
+@interface PictureViewController ()
 
 @end
 
-@implementation SecondViewController
+@implementation PictureViewController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
