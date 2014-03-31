@@ -25,7 +25,7 @@
         UIButton *filter1 = [UIButton buttonWithType:UIButtonTypeRoundedRect];
         filter1.frame = CGRectMake(20,0,50,50);
         [filter1 setTitle:@"filter1" forState:UIControlStateNormal];
-        [filter1 addTarget:primaryView action:@selector(pushed_button:) forControlEvents:UIControlEventTouchUpInside];
+        [filter1 addTarget:self action:@selector(pushed_button:) forControlEvents:UIControlEventTouchUpInside];
         filter1.tag=1;
         [self addSubview:filter1];
         
@@ -45,17 +45,6 @@
         
     }
     return self;
-}
-
--(void)pushed_button:(id)sender
-{
-    if ([sender tag] == 1) {
-        NSLog(@"1");
-    } else if ([sender tag] == 2) {
-        NSLog(@"2");
-    } else if ([sender tag] == 3) {
-        NSLog(@"3");
-    }
 }
 
 @end
