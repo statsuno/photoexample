@@ -9,7 +9,10 @@
 #import "PictureViewController.h"
 
 @interface PictureViewController ()
-
+@property long n;
+@property NSString *path;
+@property NSFileManager *fileManager;
+@property NSString *documentsDirectory;
 @end
 
 @implementation PictureViewController
@@ -29,18 +32,24 @@
 	// Do any additional setup after loading the view.
     self.view.backgroundColor=[UIColor blackColor];
     
+    UIBarButtonItem *right = [[UIBarButtonItem alloc]
+                              initWithTitle:@"delete"
+                              style:UIBarButtonItemStylePlain
+                              target:self action:@selector(delete)];
+    self.navigationItem.rightBarButtonItem = right;
+    
     NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
-    long n = [ud integerForKey:@"KEY_K"];
+    self.n = [ud integerForKey:@"KEY_K"];
     
     NSData *myData;
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *documentsDirectory = [paths objectAtIndex:0];
-    NSString *filename= [NSString stringWithFormat:@"test%ld.jpg",n];
-    NSString *path = [documentsDirectory stringByAppendingPathComponent:filename];
-    NSFileManager *fileManager = [NSFileManager defaultManager];
-    BOOL success = [fileManager fileExistsAtPath:path];
+    self.documentsDirectory = [paths objectAtIndex:0];
+    NSString *filename= [NSString stringWithFormat:@"test%ld.jpg",self.n];
+    self.path = [self.documentsDirectory stringByAppendingPathComponent:filename];
+    self.fileManager = [NSFileManager defaultManager];
+    BOOL success = [self.fileManager fileExistsAtPath:self.path];
     if(success) {
-        myData = [[NSData alloc] initWithContentsOfFile:path];
+        myData = [[NSData alloc] initWithContentsOfFile:self.path];
     }
     
     CGRect rect = CGRectMake(10, 10, 300, 350);
@@ -53,6 +62,63 @@
     // UIImageViewのインスタンスをビューに追加
     [self.view addSubview:imageView];
     
+}
+
+-(void)delete
+{
+    [self.navigationController setToolbarHidden:YES animated:NO];
+    UIActionSheet *sheet=[[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"キャンセル" destructiveButtonTitle:@"削除" otherButtonTitles:nil, nil];
+    [sheet showInView:self.view.window];
+    //[sheet showFromToolbar:self.navigationController.toolbar];
+    self.navigationController.toolbarHidden = NO;
+}
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    switch (buttonIndex)
+    {
+        case 0:
+        {
+            NSLog(@"Red");
+            NSError *error;
+            // ファイルを移動
+            BOOL result = [self.fileManager removeItemAtPath:self.path error:&error];
+            if (result) {
+                NSLog(@"ファイルを削除に成功：%@", self.path);
+            } else {
+                NSLog(@"ファイルの削除に失敗：%@", error.description);
+            }
+            
+            //トータル枚数
+            int k= [[app models] integerForKey:@"KEY_I"];
+            //トータル枚数-1
+            [[app models] setInteger:k-1 forKey:@"KEY_I"];
+            
+            //リネーム
+            for(int i=(int)self.n;i<k;i++){
+                NSString *beforename= [NSString stringWithFormat:@"test%d.jpg",i+1];
+                NSString *aftername= [NSString stringWithFormat:@"test%d.jpg",i];
+                NSString *beforepath = [self.documentsDirectory stringByAppendingPathComponent:beforename];
+                NSString *afterpath = [self.documentsDirectory stringByAppendingPathComponent:aftername];
+                //[self.fileManager moveItemAtPath:beforepath toPath:afterpath error:&error];
+                NSLog(@"%@ to %@", beforepath,afterpath);
+                BOOL result = [self.fileManager moveItemAtPath:beforepath toPath:afterpath error:&error];
+                if (result) {
+                    NSLog(@"ファイルを削除に成功：%@ to %@", beforepath,afterpath);
+                } else {
+                    NSLog(@"ファイルの削除に失敗：%@ ", error.description);
+                }
+            }
+
+            [self.navigationController popViewControllerAnimated:YES];
+            [self.view removeFromSuperview];
+            
+            break;
+        }
+            
+        default:
+            break;
+    }
 }
 
 - (void)didReceiveMemoryWarning
