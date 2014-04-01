@@ -25,7 +25,7 @@
     //self.window.rootViewController = self.viewController;
     
     self.models = [[NSUserDefaults alloc] init];
-    [self.models setObject:@"0" forKey:@"KEY_I"];
+    [self.models setObject:@"-1" forKey:@"MAX_PHOTO_NUMBER"];
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.backgroundColor = [UIColor blackColor];

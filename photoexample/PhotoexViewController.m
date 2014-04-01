@@ -67,13 +67,14 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     NSMutableArray *photo1 = [NSMutableArray array];
-    int n = [[app models] integerForKey:@"KEY_I"];
+    int n = [[app models] integerForKey:@"MAX_PHOTO_NUMBER"];
     NSLog(@"n=%d",n);
     
-    if (n==0) {
+    if (n<0) {
+        self.array = 0;
     }
     else{
-        for (int i = 0; i < n; i++) {
+        for (int i = 0; i < n+1; i++) {
             NSData *myData;
             NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
             NSString *documentsDirectory = [paths objectAtIndex:0];
@@ -135,7 +136,8 @@
     //クリックされたらよばれる
     PictureViewController *c = PictureViewController.new;
     NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
-    [ud setInteger:(int)indexPath.row forKey:@"KEY_K"];
+    //0から始めてクリックしたアイテムの順番をSELECTED_ITEM_NUMBERに格納
+    [ud setInteger:(int)indexPath.row forKey:@"SELECTED_PHOTO_NUMBER"];
     [self.navigationController pushViewController:c animated:YES];
     NSLog(@"Clicked %ld-%ld",(long)indexPath.section,(long)indexPath.row);
 }

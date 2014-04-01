@@ -7,7 +7,6 @@
 //
 
 #import "FilterchoiceView.h"
-#import "CameraViewController.h"
 
 @interface FilterchoiceView ()
 
@@ -45,6 +44,19 @@
         
     }
     return self;
+}
+
+-(void)pushed_button:(id)sender
+{
+    CameraViewController *filterchoice = [[CameraViewController alloc]init];
+    filterchoice.delegate = self;
+    if ([sender tag] == 1) {
+        [filterchoice filterch:1];
+    } else if ([sender tag] == 2) {
+        [filterchoice filterch:2];
+    } else if ([sender tag] == 3) {
+        [filterchoice filterch:3];
+    }
 }
 
 @end

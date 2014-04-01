@@ -39,7 +39,7 @@
     self.navigationItem.rightBarButtonItem = right;
     
     NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
-    self.n = [ud integerForKey:@"KEY_K"];
+    self.n = [ud integerForKey:@"SELECTED_PHOTO_NUMBER"];
     
     NSData *myData;
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
@@ -90,26 +90,29 @@
             }
             
             //トータル枚数
-            int k= [[app models] integerForKey:@"KEY_I"];
-            //トータル枚数-1
-            [[app models] setInteger:k-1 forKey:@"KEY_I"];
+            int k= [[app models] integerForKey:@"MAX_PHOTO_NUMBER"];
             
-            //リネーム
-            for(int i=(int)self.n;i<k;i++){
-                NSString *beforename= [NSString stringWithFormat:@"test%d.jpg",i+1];
-                NSString *aftername= [NSString stringWithFormat:@"test%d.jpg",i];
-                NSString *beforepath = [self.documentsDirectory stringByAppendingPathComponent:beforename];
-                NSString *afterpath = [self.documentsDirectory stringByAppendingPathComponent:aftername];
-                //[self.fileManager moveItemAtPath:beforepath toPath:afterpath error:&error];
-                NSLog(@"%@ to %@", beforepath,afterpath);
-                BOOL result = [self.fileManager moveItemAtPath:beforepath toPath:afterpath error:&error];
-                if (result) {
-                    NSLog(@"ファイルを削除に成功：%@ to %@", beforepath,afterpath);
-                } else {
-                    NSLog(@"ファイルの削除に失敗：%@ ", error.description);
+            if (k>=0){
+                //トータル枚数-1
+                [[app models] setInteger:k-1 forKey:@"MAX_PHOTO_NUMBER"];
+            
+                //リネーム
+                for(int i=(int)self.n;i<k;i++){
+                    NSString *beforename= [NSString stringWithFormat:@"test%d.jpg",i+1];
+                    NSString *aftername= [NSString stringWithFormat:@"test%d.jpg",i];
+                    NSString *beforepath = [self.documentsDirectory stringByAppendingPathComponent:beforename];
+                    NSString *afterpath = [self.documentsDirectory stringByAppendingPathComponent:aftername];
+                    NSLog(@"%@ to %@", beforepath,afterpath);
+                    BOOL result = [self.fileManager moveItemAtPath:beforepath toPath:afterpath error:&error];
+                    if (result) {
+                        NSLog(@"ファイルを移動に成功：%@ to %@", beforepath,afterpath);
+                    } else {
+                        NSLog(@"ファイルの移動に失敗：%@ ", error.description);
+                    }
                 }
             }
-
+            
+            //前の画面に戻る
             [self.navigationController popViewControllerAnimated:YES];
             [self.view removeFromSuperview];
             

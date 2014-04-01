@@ -12,8 +12,9 @@
 #import "FilterchoiceView.h"
 
 @interface CameraViewController ()
-@property (nonatomic, strong) FilterchoiceView *filterView;
+@property (nonatomic, strong) FilterchoiceView *filterchoiceView;
 @property BOOL isFilterViewOpen;
+@property GPUImageView *filterView;
 @end
 
 @implementation CameraViewController
@@ -91,8 +92,8 @@
     //	[terminalFilter prepareForImageCapture];
     
     [stillCamera addTarget:filter];
-    GPUImageView *filterView = (GPUImageView *)self.view;
-    [filter addTarget:filterView];
+    self.filterView = (GPUImageView *)self.view;
+    [filter addTarget:self.filterView];
     //    [terminalFilter addTarget:filterView];
     
     //    [stillCamera.inputCamera lockForConfiguration:nil];
@@ -129,8 +130,8 @@
     [stillCamera capturePhotoAsJPEGProcessedUpToFilter:filter withCompletionHandler:^(NSData *processedJPEG, NSError *error){
         
         //NSData *data = UIImagePNGRepresentation(image);
-        int i= [[app models] integerForKey:@"KEY_I"];
-        [[app models] setInteger:i+1 forKey:@"KEY_I"];
+        int i= [[app models] integerForKey:@"MAX_PHOTO_NUMBER"]+1;
+        [[app models] setInteger:i forKey:@"MAX_PHOTO_NUMBER"];
         NSLog(@"i=%d",i);
         NSString *filePath = [NSString stringWithFormat:@"%@/test%d.jpg" , [NSHomeDirectory() stringByAppendingPathComponent:@"Documents"],i];
         //NSLog(@"%@", filePath);
@@ -144,26 +145,37 @@
 }
 
 -(void)pushfilterview{
-    if(!self.filterView){
-        self.filterView = FilterchoiceView.new;
+    if(!self.filterchoiceView){
+        self.filterchoiceView = FilterchoiceView.new;
     }
     if(self.isFilterViewOpen){
-        [self.filterView removeFromSuperview];
+        [self.filterchoiceView removeFromSuperview];
         self.isFilterViewOpen = NO;
     }else{
-        [self.view addSubview:self.filterView];
+        [self.view addSubview:self.filterchoiceView];
         self.isFilterViewOpen = YES;
     }
 }
 
--(void)pushed_button:(id)sender
+-(void)filterch:(NSInteger)val
 {
-    if ([sender tag] == 1) {
-        NSLog(@"1");
-    } else if ([sender tag] == 2) {
-        NSLog(@"2");
-    } else if ([sender tag] == 3) {
-        NSLog(@"3");
+    if (val==1) {
+        NSLog(@"%d",1);
+        
+        //filter = [[GPUImageToonFilter alloc] init];
+        //[stillCamera addTarget:filter];
+        //[filter addTarget:self.filterView];
+        //[stillCamera startCameraCapture];
+        //[self.view addSubview:self.filterView];
+        
+        //secondFilter = [[GPUImageSepiaFilter alloc] init];
+        //[filter addTarget:secondFilter];
+        //[stillCamera startCameraCapture];
+        
+    }else if(val==2){
+        NSLog(@"%d",2);
+    }else if(val==3){
+        NSLog(@"%d",3);
     }
 }
 
