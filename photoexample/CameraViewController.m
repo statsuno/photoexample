@@ -33,7 +33,7 @@
 {
 	CGRect mainScreenFrame = [[UIScreen mainScreen] bounds];
     
-    self.a=1111;
+    
     // Yes, I know I'm a caveman for doing all this by hand
 	GPUImageView *primaryView = [[GPUImageView alloc] initWithFrame:mainScreenFrame];
 	primaryView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
@@ -130,7 +130,6 @@
     
     //    [stillCamera capturePhotoAsJPEGProcessedUpToFilter:terminalFilter withCompletionHandler:^(NSData *processedJPEG, NSError *error){
     [stillCamera capturePhotoAsJPEGProcessedUpToFilter:filter withCompletionHandler:^(NSData *processedJPEG, NSError *error){
-        
         //NSData *data = UIImagePNGRepresentation(image);
         int i= [[app models] integerForKey:@"MAX_PHOTO_NUMBER"]+1;
         [[app models] setInteger:i forKey:@"MAX_PHOTO_NUMBER"];
@@ -164,7 +163,7 @@
     if (val==1) {
         NSLog(@"%d",self.a);
         
-        [self.filterchoiceView removeFromSuperview];
+        //[self.filterchoiceView removeFromSuperview];
         /*
         [stillCamera stopCameraCapture];
         [filter removeTarget:self.filterView];

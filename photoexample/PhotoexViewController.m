@@ -32,6 +32,8 @@
     NSArray *buttons=[NSArray arrayWithObjects:spacer,button,spacer,nil];
     [self setToolbarItems:buttons animated:YES];
     
+    // collectionViewにcellのクラスを登録
+    [self.collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"CollectionViewCell"];
 }
 
 /*
@@ -47,24 +49,15 @@
     
 }
 
--(void)createCollectionView
+- (void)viewWillAppear:(BOOL)animated
 {
-    /*UICollectionViewのコンテンツの設定 UICollectionViewFlowLayout*/
-    self.flowLayout = [[UICollectionViewFlowLayout alloc]init];
-    self.flowLayout.itemSize = CGSizeMake(96, 72);  //表示するアイテムのサイズ
-    self.flowLayout.minimumLineSpacing = 10.0f;  //セクションとアイテムの間隔
-    self.flowLayout.minimumInteritemSpacing = 12.0f;  //アイテム同士の間隔
-    
-    /*UICollectionViewの土台を作成*/
-    self.collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height) collectionViewLayout:self.flowLayout];
-    self.collectionView.delegate = self;
-    self.collectionView.dataSource = self;
-    [self.collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"UICollectionViewCell"];  //collectionViewにcellのクラスを登録。セルの表示に使う
-    
-    [self.view addSubview:self.collectionView];
+    [self createCollectionView];
+    self.navigationController.toolbarHidden = NO;
+    [self.navigationController setToolbarHidden:NO animated:YES];
 }
 
-- (void)viewWillAppear:(BOOL)animated
+
+-(void)createCollectionView
 {
     NSMutableArray *photo1 = [NSMutableArray array];
     int n = [[app models] integerForKey:@"MAX_PHOTO_NUMBER"];
@@ -91,12 +84,19 @@
         self.array = @[photo1];
     }
     
-    // collectionViewにcellのクラスを登録
-    [self.collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"CollectionViewCell"];
-    [self createCollectionView];
+    /*UICollectionViewのコンテンツの設定 UICollectionViewFlowLayout*/
+    self.flowLayout = [[UICollectionViewFlowLayout alloc]init];
+    self.flowLayout.itemSize = CGSizeMake(96, 72);  //表示するアイテムのサイズ
+    self.flowLayout.minimumLineSpacing = 10.0f;  //セクションとアイテムの間隔
+    self.flowLayout.minimumInteritemSpacing = 12.0f;  //アイテム同士の間隔
     
-    self.navigationController.toolbarHidden = NO;
-    [self.navigationController setToolbarHidden:NO animated:YES]; //change
+    /*UICollectionViewの土台を作成*/
+    self.collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height) collectionViewLayout:self.flowLayout];
+    self.collectionView.delegate = self;
+    self.collectionView.dataSource = self;
+    [self.collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"UICollectionViewCell"];  //collectionViewにcellのクラスを登録。セルの表示に使う
+    
+    [self.view addSubview:self.collectionView];
 }
 
 #pragma mark -
