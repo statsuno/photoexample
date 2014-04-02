@@ -60,7 +60,8 @@
 		CA060E7E18E85A9C00D3310E /* FilterchoiceView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FilterchoiceView.h; sourceTree = "<group>"; };
 		CA060E7F18E85A9C00D3310E /* FilterchoiceView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FilterchoiceView.m; sourceTree = "<group>"; };
 		CA060F0118EAC26700D3310E /* GPUImage.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = GPUImage.xcodeproj; path = framework/GPUImage.xcodeproj; sourceTree = "<group>"; };
-		CA0E3EA718CAFDE7004CF694 /* photoexample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = photoexample.app; path = "/Users/sho/Documents/objective-C/photoexample/build/Debug-iphoneos/photoexample.app"; sourceTree = "<absolute>"; };
+		CA060F1218EC020C00D3310E /* photoexample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = photoexample.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		CA060FBA18EC150900D3310E /* photoexampleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = photoexampleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CA0E3EAA18CAFDE7004CF694 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		CA0E3EAC18CAFDE7004CF694 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		CA0E3EAE18CAFDE7004CF694 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -73,7 +74,6 @@
 		CA0E3EBF18CAFDE7004CF694 /* PhotoexViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PhotoexViewController.h; sourceTree = "<group>"; };
 		CA0E3EC018CAFDE7004CF694 /* PhotoexViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PhotoexViewController.m; sourceTree = "<group>"; };
 		CA0E3EC218CAFDE7004CF694 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		CA0E3EC818CAFDE7004CF694 /* photoexampleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = photoexampleTests.xctest; path = "/Users/sho/Documents/objective-C/photoexample/build/Debug-iphoneos/photoexampleTests.xctest"; sourceTree = "<absolute>"; };
 		CA0E3EC918CAFDE7004CF694 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		CA0E3ED118CAFDE7004CF694 /* photoexampleTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "photoexampleTests-Info.plist"; sourceTree = "<group>"; };
 		CA0E3ED318CAFDE7004CF694 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -136,6 +136,8 @@
 				CA0E3EB018CAFDE7004CF694 /* photoexample */,
 				CA0E3ECF18CAFDE7004CF694 /* photoexampleTests */,
 				CA0E3EA918CAFDE7004CF694 /* Frameworks */,
+				CA060F1218EC020C00D3310E /* photoexample.app */,
+				CA060FBA18EC150900D3310E /* photoexampleTests.xctest */,
 			);
 			sourceTree = "<group>";
 		};
@@ -222,7 +224,7 @@
 			);
 			name = photoexample;
 			productName = photoexample;
-			productReference = CA0E3EA718CAFDE7004CF694 /* photoexample.app */;
+			productReference = CA060F1218EC020C00D3310E /* photoexample.app */;
 			productType = "com.apple.product-type.application";
 		};
 		CA0E3EC718CAFDE7004CF694 /* photoexampleTests */ = {
@@ -240,7 +242,7 @@
 			);
 			name = photoexampleTests;
 			productName = photoexampleTests;
-			productReference = CA0E3EC818CAFDE7004CF694 /* photoexampleTests.xctest */;
+			productReference = CA060FBA18EC150900D3310E /* photoexampleTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -452,7 +454,7 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
-					"/Users/sho/Documents/framework/GPUImage-master/framework/**",
+					"framework/**",
 				);
 				INFOPLIST_FILE = "photoexample/photoexample-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -470,7 +472,7 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
-					"/Users/sho/Documents/framework/GPUImage-master/framework/**",
+					"framework/**",
 				);
 				INFOPLIST_FILE = "photoexample/photoexample-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";

@@ -15,6 +15,7 @@
 @property (nonatomic, strong) FilterchoiceView *filterchoiceView;
 @property BOOL isFilterViewOpen;
 @property GPUImageView *filterView;
+@property int a;
 @end
 
 @implementation CameraViewController
@@ -32,6 +33,7 @@
 {
 	CGRect mainScreenFrame = [[UIScreen mainScreen] bounds];
     
+    self.a=1111;
     // Yes, I know I'm a caveman for doing all this by hand
 	GPUImageView *primaryView = [[GPUImageView alloc] initWithFrame:mainScreenFrame];
 	primaryView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
@@ -160,17 +162,19 @@
 -(void)filterch:(NSInteger)val
 {
     if (val==1) {
-        NSLog(@"%d",1);
+        NSLog(@"%d",self.a);
         
-        //filter = [[GPUImageToonFilter alloc] init];
-        //[stillCamera addTarget:filter];
-        //[filter addTarget:self.filterView];
-        //[stillCamera startCameraCapture];
-        //[self.view addSubview:self.filterView];
-        
-        //secondFilter = [[GPUImageSepiaFilter alloc] init];
-        //[filter addTarget:secondFilter];
-        //[stillCamera startCameraCapture];
+        [self.filterchoiceView removeFromSuperview];
+        /*
+        [stillCamera stopCameraCapture];
+        [filter removeTarget:self.filterView];
+        [stillCamera removeTarget:filter];
+        filter = [[GPUImageToonFilter alloc] init];
+        [stillCamera addTarget:filter];
+        self.filterView = (GPUImageView *)self.view;
+        [filter addTarget:self.filterView];
+        [stillCamera startCameraCapture];
+         */
         
     }else if(val==2){
         NSLog(@"%d",2);
