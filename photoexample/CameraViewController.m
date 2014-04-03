@@ -15,7 +15,6 @@
 @property (nonatomic, strong) FilterchoiceView *filterchoiceView;
 @property BOOL isFilterViewOpen;
 @property GPUImageView *filterView;
-@property int a;
 @end
 
 @implementation CameraViewController
@@ -73,7 +72,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+
     stillCamera = [[GPUImageStillCamera alloc] init];
     //    stillCamera = [[GPUImageStillCamera alloc] initWithSessionPreset:AVCaptureSessionPreset640x480 cameraPosition:AVCaptureDevicePositionBack];
     stillCamera.outputImageOrientation = UIInterfaceOrientationPortrait;
@@ -161,24 +160,27 @@
 -(void)filterch:(NSInteger)val
 {
     if (val==1) {
-        NSLog(@"%d",self.a);
-        
-        //[self.filterchoiceView removeFromSuperview];
-        /*
-        [stillCamera stopCameraCapture];
+        //[stillCamera stopCameraCapture];
         [filter removeTarget:self.filterView];
         [stillCamera removeTarget:filter];
         filter = [[GPUImageToonFilter alloc] init];
         [stillCamera addTarget:filter];
-        self.filterView = (GPUImageView *)self.view;
         [filter addTarget:self.filterView];
-        [stillCamera startCameraCapture];
-         */
+        //[stillCamera startCameraCapture];
         
     }else if(val==2){
-        NSLog(@"%d",2);
+        [filter removeTarget:self.filterView];
+        [stillCamera removeTarget:filter];
+        filter = [[GPUImageSepiaFilter alloc] init];
+        [stillCamera addTarget:filter];
+        [filter addTarget:self.filterView];
+        
     }else if(val==3){
-        NSLog(@"%d",3);
+        [filter removeTarget:self.filterView];
+        [stillCamera removeTarget:filter];
+        filter = [[GPUImageSketchFilter alloc] init];
+        [stillCamera addTarget:filter];
+        [filter addTarget:self.filterView];
     }
 }
 

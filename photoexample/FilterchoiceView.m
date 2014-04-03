@@ -48,7 +48,7 @@
 
 -(void)pushed_button:(id)sender
 {
-    CameraViewController *filterchoice = [[CameraViewController alloc]init];
+    CameraViewController *filterchoice = [app camera];
     filterchoice.delegate = self;
     if ([sender tag] == 1) {
         [filterchoice filterch:1];

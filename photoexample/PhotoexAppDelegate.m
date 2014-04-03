@@ -27,6 +27,8 @@
     self.models = [NSUserDefaults standardUserDefaults];
     [self.models setObject:@"-1" forKey:@"MAX_PHOTO_NUMBER"];
     
+    self.camera = CameraViewController.new;
+    
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.backgroundColor = [UIColor blackColor];
     

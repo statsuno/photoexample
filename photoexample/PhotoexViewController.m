@@ -44,8 +44,7 @@
 */
 
 -(void)beginCamera{
-    CameraViewController *c2 = CameraViewController.new;
-    [self.navigationController pushViewController:c2 animated:YES];
+    [self.navigationController pushViewController:[app camera] animated:YES];
     
 }
 

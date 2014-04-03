@@ -8,11 +8,13 @@
 
 #import <UIKit/UIKit.h>
 #import "PhotoexViewController.h"
+#import "CameraViewController.h"
 
 @interface PhotoexAppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
 @property (strong, nonatomic) PhotoexViewController *viewController;
 @property (strong, nonatomic) NSUserDefaults *models;
+@property (strong, nonatomic) CameraViewController *camera;
 
 @end
