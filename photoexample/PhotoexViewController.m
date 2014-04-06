@@ -4,7 +4,8 @@
 #import "PhotoexViewController.h"
 
 @interface PhotoexViewController ()
-
+@property NSData *myData;
+@property NSString *path;
 @end
 
 @implementation PhotoexViewController
@@ -18,15 +19,6 @@
 
 - (void)viewDidLoad{
     [super viewDidLoad];
-    self.view.backgroundColor = [UIColor blackColor];
-    
-    /*UIBarButtonItem *right = [[UIBarButtonItem alloc]
-                              initWithTitle:@"next"
-                              style:UIBarButtonItemStylePlain
-                              target:self action:@selector(actionNext)];
-    self.navigationItem.rightBarButtonItem = right;
-     */
-    
     UIBarButtonItem *button=[[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(beginCamera)];
     UIBarButtonItem *spacer=[[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
     NSArray *buttons=[NSArray arrayWithObjects:spacer,button,spacer,nil];
@@ -34,14 +26,9 @@
     
     // collectionViewにcellのクラスを登録
     [self.collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"CollectionViewCell"];
-}
+    [self createCollectionView];
 
-/*
-- (void)actionNext{
-    SecondViewController *c = SecondViewController.new;
-    [self.navigationController pushViewController:c animated:YES];
 }
-*/
 
 -(void)beginCamera{
     [self.navigationController pushViewController:[app camera] animated:YES];
@@ -50,39 +37,49 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    [self createCollectionView];
+    NSMutableArray *photo1 = [NSMutableArray array];
+    int n = [[app models] integerForKey:@"MAX_PHOTO_NUMBER"];
+    
+    if (n<0) {
+        self.array = nil;
+    }
+    else{
+        for (int i = 0; i < n+1; i++) {
+            NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+            NSString *documentsDirectory = [paths objectAtIndex:0];
+            NSString *filename= [NSString stringWithFormat:@"test%d.jpg",i];
+            self.path = [documentsDirectory stringByAppendingPathComponent:filename];
+            NSFileManager *fileManager = [NSFileManager defaultManager];
+            BOOL success = [fileManager fileExistsAtPath:self.path];
+            if(success) {
+                self.myData = [[NSData alloc] initWithContentsOfFile:self.path];
+            }
+            UIImage *img = [[UIImage alloc] initWithData:self.myData];
+            [photo1 addObject:img];
+        }
+        self.array = photo1;
+    }
+    [self.collectionView reloadData];
     self.navigationController.toolbarHidden = NO;
     [self.navigationController setToolbarHidden:NO animated:YES];
+}
+
+-(void)viewDidDisappear:(BOOL)animated
+{
+    /*
+     int n = [[app models] integerForKey:@"MAX_PHOTO_NUMBER"];
+     for(int i = 0; i < n+1; i++) {
+        self.myData = nil;
+        self.img = nil;
+     }
+     self.array = 0;
+    */
+    [self.view removeFromSuperview];
 }
 
 
 -(void)createCollectionView
 {
-    NSMutableArray *photo1 = [NSMutableArray array];
-    int n = [[app models] integerForKey:@"MAX_PHOTO_NUMBER"];
-    NSLog(@"n=%d",n);
-    
-    if (n<0) {
-        self.array = 0;
-    }
-    else{
-        for (int i = 0; i < n+1; i++) {
-            NSData *myData;
-            NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-            NSString *documentsDirectory = [paths objectAtIndex:0];
-            NSString *filename= [NSString stringWithFormat:@"test%d.jpg",i];
-            NSString *path = [documentsDirectory stringByAppendingPathComponent:filename];
-            NSFileManager *fileManager = [NSFileManager defaultManager];
-            BOOL success = [fileManager fileExistsAtPath:path];
-            if(success) {
-                myData = [[NSData alloc] initWithContentsOfFile:path];
-            }
-            UIImage *img = [[UIImage alloc] initWithData:myData];
-            [photo1 addObject:img];
-        }
-        self.array = @[photo1];
-    }
-    
     /*UICollectionViewのコンテンツの設定 UICollectionViewFlowLayout*/
     self.flowLayout = [[UICollectionViewFlowLayout alloc]init];
     self.flowLayout.itemSize = CGSizeMake(96, 72);  //表示するアイテムのサイズ
@@ -101,16 +98,10 @@
 #pragma mark -
 #pragma mark UICollectionViewDelegate
 
-/*セクションの数*/
-- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
-{
-    return [self.array count];
-}
-
-/*セクションに応じたセルの数*/
+/*セルの数*/
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    return [[self.array objectAtIndex:section] count];
+    return [self.array count];
 }
 
 #pragma mark -
@@ -121,7 +112,11 @@
     
     UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"UICollectionViewCell" forIndexPath:indexPath];
     
-    UIImageView *imgView = [[UIImageView alloc] initWithImage:[[self.array objectAtIndex:indexPath.section] objectAtIndex:indexPath.item]];
+    NSLog(@"%@", cell);
+    
+    UIImageView *imgView = [[UIImageView alloc] initWithImage:[self.array objectAtIndex:indexPath.item]];
+    NSLog(@"%@", imgView);
+    
     imgView.frame = CGRectMake(0.0, 0.0, 96.0, 72.0);
     
     // cellにimgViewをセット

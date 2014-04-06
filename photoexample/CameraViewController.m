@@ -127,16 +127,13 @@
 {
     [photoCaptureButton setEnabled:NO];
     
-    //    [stillCamera capturePhotoAsJPEGProcessedUpToFilter:terminalFilter withCompletionHandler:^(NSData *processedJPEG, NSError *error){
     [stillCamera capturePhotoAsJPEGProcessedUpToFilter:filter withCompletionHandler:^(NSData *processedJPEG, NSError *error){
-        //NSData *data = UIImagePNGRepresentation(image);
         int i= [[app models] integerForKey:@"MAX_PHOTO_NUMBER"]+1;
         [[app models] setInteger:i forKey:@"MAX_PHOTO_NUMBER"];
         NSLog(@"i=%d",i);
         NSString *filePath = [NSString stringWithFormat:@"%@/test%d.jpg" , [NSHomeDirectory() stringByAppendingPathComponent:@"Documents"],i];
-        //NSLog(@"%@", filePath);
         if ([processedJPEG writeToFile:filePath atomically:YES]) {
-            //NSLog(@"OK");
+            NSLog(@"OK");
         } else {
             NSLog(@"Error");
         }

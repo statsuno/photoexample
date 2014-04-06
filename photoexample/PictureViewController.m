@@ -21,7 +21,6 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        // Custom initialization
     }
     return self;
 }
@@ -29,7 +28,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view.
     self.view.backgroundColor=[UIColor blackColor];
     
     UIBarButtonItem *right = [[UIBarButtonItem alloc]
@@ -58,10 +56,27 @@
     
     // 画像の読み込み
     imageView.image = [[UIImage alloc] initWithData:myData];
+    imageView.tag=100;
     
     // UIImageViewのインスタンスをビューに追加
     [self.view addSubview:imageView];
     
+}
+
+
+-(void)viewDidDisappear:(BOOL)animated
+{
+    UIImageView* uiimgv = (UIImageView*)[self.view viewWithTag:100];
+    releaseUIImageView:uiimgv;
+    [self.view removeFromSuperview];
+}
+
+-(void)releaseUIImageView:(UIImageView*)uiimgv {
+    if(uiimgv != nil){
+        uiimgv.image = nil;
+        uiimgv.layer.sublayers = nil;
+        uiimgv = nil;
+    }
 }
 
 -(void)delete
@@ -69,7 +84,6 @@
     [self.navigationController setToolbarHidden:YES animated:NO];
     UIActionSheet *sheet=[[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"キャンセル" destructiveButtonTitle:@"削除" otherButtonTitles:nil, nil];
     [sheet showInView:self.view.window];
-    //[sheet showFromToolbar:self.navigationController.toolbar];
     self.navigationController.toolbarHidden = NO;
 }
 
@@ -127,7 +141,6 @@
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 

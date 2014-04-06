@@ -19,11 +19,6 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    // Override point for customization after application launch.
-    //self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    //self.viewController = [[PhotoexViewController alloc] init];
-    //self.window.rootViewController = self.viewController;
-    
     self.models = [NSUserDefaults standardUserDefaults];
     [self.models setObject:@"-1" forKey:@"MAX_PHOTO_NUMBER"];
     
