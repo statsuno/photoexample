@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		CA060E8018E85A9C00D3310E /* FilterchoiceView.m in Sources */ = {isa = PBXBuildFile; fileRef = CA060E7F18E85A9C00D3310E /* FilterchoiceView.m */; };
 		CA060F0B18EAC29800D3310E /* libGPUImage.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CA060F0818EAC26700D3310E /* libGPUImage.a */; };
+		CA06108418F2F45400D3310E /* libGPUImage.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CA060F0818EAC26700D3310E /* libGPUImage.a */; };
 		CA0E3EAB18CAFDE7004CF694 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CA0E3EAA18CAFDE7004CF694 /* Foundation.framework */; };
 		CA0E3EAD18CAFDE7004CF694 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CA0E3EAC18CAFDE7004CF694 /* CoreGraphics.framework */; };
 		CA0E3EAF18CAFDE7004CF694 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CA0E3EAE18CAFDE7004CF694 /* UIKit.framework */; };
@@ -112,6 +113,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CA06108418F2F45400D3310E /* libGPUImage.a in Frameworks */,
 				CA0E3ECA18CAFDE7004CF694 /* XCTest.framework in Frameworks */,
 				CA0E3ECC18CAFDE7004CF694 /* UIKit.framework in Frameworks */,
 				CA0E3ECB18CAFDE7004CF694 /* Foundation.framework in Frameworks */,
@@ -377,7 +379,7 @@
 		CA0E3ED718CAFDE7004CF694 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
+				ALWAYS_SEARCH_USER_PATHS = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -415,7 +417,7 @@
 		CA0E3ED818CAFDE7004CF694 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
+				ALWAYS_SEARCH_USER_PATHS = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;

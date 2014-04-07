@@ -66,11 +66,12 @@
 
 -(void)viewDidDisappear:(BOOL)animated
 {
-    UIImageView* uiimgv = (UIImageView*)[self.view viewWithTag:100];
-    releaseUIImageView:uiimgv;
+    //UIImageView* uiimgv = (UIImageView*)[self.view viewWithTag:100];
+    //releaseUIImageView:uiimgv;
     [self.view removeFromSuperview];
 }
 
+/*
 -(void)releaseUIImageView:(UIImageView*)uiimgv {
     if(uiimgv != nil){
         uiimgv.image = nil;
@@ -78,6 +79,7 @@
         uiimgv = nil;
     }
 }
+*/
 
 -(void)delete
 {

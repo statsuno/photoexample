@@ -9,6 +9,6 @@
 #import <UIKit/UIKit.h>
 #import "CameraViewController.h"
 
-@interface FilterchoiceView : UIView
+@interface FilterchoiceView : UIView <FilterDelegate>
 
 @end

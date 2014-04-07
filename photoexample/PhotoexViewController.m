@@ -6,6 +6,7 @@
 @interface PhotoexViewController ()
 @property NSData *myData;
 @property NSString *path;
+@property NSMutableArray *photo;
 @end
 
 @implementation PhotoexViewController
@@ -37,7 +38,7 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    NSMutableArray *photo1 = [NSMutableArray array];
+    self.photo = [NSMutableArray array];
     int n = [[app models] integerForKey:@"MAX_PHOTO_NUMBER"];
     
     if (n<0) {
@@ -55,9 +56,9 @@
                 self.myData = [[NSData alloc] initWithContentsOfFile:self.path];
             }
             UIImage *img = [[UIImage alloc] initWithData:self.myData];
-            [photo1 addObject:img];
+            [self.photo addObject:img];
         }
-        self.array = photo1;
+        self.array = self.photo;
     }
     [self.collectionView reloadData];
     self.navigationController.toolbarHidden = NO;
@@ -66,15 +67,14 @@
 
 -(void)viewDidDisappear:(BOOL)animated
 {
-    /*
-     int n = [[app models] integerForKey:@"MAX_PHOTO_NUMBER"];
-     for(int i = 0; i < n+1; i++) {
+     if(self.myData) {
         self.myData = nil;
-        self.img = nil;
      }
-     self.array = 0;
-    */
+     self.array = nil;
+    
+    //[self.collectionView removeFromSuperview];
     [self.view removeFromSuperview];
+    
 }
 
 
@@ -111,13 +111,14 @@
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     
     UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"UICollectionViewCell" forIndexPath:indexPath];
+
+    //UIImageView *imgView = [[UIImageView alloc] initWithImage:[self.array objectAtIndex:indexPath.item]];
+    UIImage *img = [self.photo objectAtIndex:indexPath.item];
+    UIImageView *imgView = [[UIImageView alloc]initWithFrame:CGRectMake(0.0, 0.0, 96.0, 72.0)];
+    imgView.image = img;
+    NSLog(@"%@",imgView);
     
-    NSLog(@"%@", cell);
-    
-    UIImageView *imgView = [[UIImageView alloc] initWithImage:[self.array objectAtIndex:indexPath.item]];
-    NSLog(@"%@", imgView);
-    
-    imgView.frame = CGRectMake(0.0, 0.0, 96.0, 72.0);
+    //imgView.frame = CGRectMake(0.0, 0.0, 96.0, 72.0);
     
     // cellにimgViewをセット
     [cell addSubview:imgView];
